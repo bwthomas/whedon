@@ -31,7 +31,7 @@ module Whedon
   # A 'cron line' is a line in the sense of a crontab
   # (man 5 crontab) file line.
   #
-  class Parser
+  class Schedule
 
     DAY_S = 24 * 3600
     WEEK_S = 7 * DAY_S

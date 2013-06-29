@@ -1,2 +1,2 @@
 require 'whedon/version'
-require 'whedon/parser'
+require 'whedon/schedule'

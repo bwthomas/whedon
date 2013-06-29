@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["John Mettraux", "Blake Thomas"]
   s.email       = ["jmettraux@gmail.com", "bwthomas@gmail.com"]
   s.homepage    = "https://github.com/bwthomas/whedon"
-  s.summary     = %q{Parses cron expressions and calculates the next occurence}
-  s.description = %q{Parses cron expressions and calculates the next occurence}
+  s.summary     = %q{Parses cron lines}
+  s.description = %q{Parses cron lines into a Schedule instance that can be queried.}
 
   s.rubyforge_project = "whedon"
 
