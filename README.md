@@ -1,7 +1,7 @@
 # whedon - parse crontab syntax
 
-The goal of this gem is to parse a crontab timing specification and the next
-scheduled time.
+The goal of this gem is to parse a crontab timing specification and produce an
+object that can be queried about the schedule.
 
 This gem began as an extraction of Rufus::CronLine from the rufus-schedule gem.
 
