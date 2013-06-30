@@ -5,6 +5,8 @@ object that can be queried about the schedule.
 
 This gem began as an extraction of Rufus::CronLine from the rufus-schedule gem.
 
+[![Build Status](https://travis-ci.org/bwthomas/whedon.png)](https://travis-ci.org/bwthomas/whedon)
+
 ## API example
 
 ```
