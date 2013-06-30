@@ -3,7 +3,7 @@
 The goal of this gem is to parse a crontab timing specification and produce an
 object that can be queried about the schedule.
 
-This gem began as an extraction of Rufus::CronLine from the rufus-schedule gem.
+This gem began as an extraction of Rufus::CronLine from the rufus-scheduler gem.
 
 [![Build Status](https://travis-ci.org/bwthomas/whedon.png)](https://travis-ci.org/bwthomas/whedon)
 
