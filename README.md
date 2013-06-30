@@ -20,7 +20,7 @@ sch.next
 sch.next("2020/07/01")
 
 # Given date/time matches cron string
-sch.match?("2020/07/01")
+sch.matches?("2020/07/01 14:00:00")
 
 # Give cron string represented as an array
 # [seconds minutes hours days months weekdays monthdays timezone]

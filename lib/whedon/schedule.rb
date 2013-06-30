@@ -87,9 +87,7 @@ module Whedon
     #
     def matches?(time)
 
-      time = Time.at(time) unless time.kind_of?(Time)
-
-      time = @timezone.utc_to_local(time.getutc) if @timezone
+      time = as_time(time)
 
       return false unless sub_match?(time, :sec, @seconds)
       return false unless sub_match?(time, :min, @minutes)
@@ -131,8 +129,7 @@ module Whedon
     #
     def next_time(now=Time.now)
 
-      time = @timezone ? @timezone.utc_to_local(now.getutc) : now
-
+      time = as_time(now)
       time = time - time.usec * 1e-6 + 1
         # small adjustment before starting
 
@@ -212,6 +209,16 @@ module Whedon
 
     def raise_error_on_duplicate?
       !!(raise_error_on_duplicate)
+    end
+
+    def as_time(time)
+      unless time.kind_of?(Time)
+        time = ( time.to_s =~ /^\d+$/ ) ?
+          Time.at(time.to_s) : Time.parse(time.to_s)
+      end
+
+      time = @timezone.utc_to_local(time.getutc) if @timezone
+      time
     end
 
     def parse_weekdays(item)
