@@ -24,7 +24,18 @@ sch.next("2020/07/01")
 # Given date/time matches cron string
 sch.matches?("2020/07/01 14:00:00")
 
+# Time.now matches cron string
+sch.now?
+
 # Give cron string represented as an array
 # [seconds minutes hours days months weekdays monthdays timezone]
 sch.to_a
 ```
+
+## And ... the Name?
+
+Why 'whedon' ? First, [when](http://rubygems.org/gems/when) was taken. I was
+considering variations on 'when do', & it occurred to me that 'whedon' (a la
+[Joss Whedon](http://en.wikipedia.org/wiki/Joss_Whedon)) was an obvious anagram
+of 'when do'. The pun regarding Whedon::Schedule being that Joss Whedon's
+television series tend to get pulled from the network schedule
