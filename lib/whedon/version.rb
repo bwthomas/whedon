@@ -1,5 +1,3 @@
-module Parse
-  module Cron
-    VERSION = "0.0.1"
-  end
+module Whedon
+  VERSION = "0.0.2"
 end

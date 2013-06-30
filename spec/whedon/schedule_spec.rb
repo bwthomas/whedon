@@ -59,7 +59,7 @@ describe Whedon::Schedule do
 
     it 'rejects invalid cronlines' do
 
-      lambda { cl '* nada * * 9' }.should raise_error(ArgumentError)
+      lambda { cl '* nada * * 9' }.should raise_error(Whedon::ParseError)
     end
 
     it 'interprets cron strings with TZ correctly' do
@@ -88,7 +88,7 @@ describe Whedon::Schedule do
 
       lambda {
         Whedon::Schedule.new('* * * * sun#1-sun#2')
-      }.should raise_error(ArgumentError)
+      }.should raise_error(Whedon::ParseError)
     end
 
     it 'accepts items with initial 0' do
@@ -110,7 +110,7 @@ describe Whedon::Schedule do
 
     it 'raises an error for duplicates when configured to do so' do
 
-      lambda { Ex.new('* * L,L * *') }.should raise_error(ArgumentError)
+      lambda { Ex.new('* * L,L * *') }.should raise_error(Whedon::ParseError)
     end
 
     it 'interprets cron strings with L correctly' do
@@ -122,22 +122,22 @@ describe Whedon::Schedule do
 
     it 'does not support ranges for L' do
 
-      lambda { cl '* * 15-L * *'}.should raise_error(ArgumentError)
-      lambda { cl '* * L/4 * *'}.should raise_error(ArgumentError)
+      lambda { cl '* * 15-L * *'}.should raise_error(Whedon::ParseError)
+      lambda { cl '* * L/4 * *'}.should raise_error(Whedon::ParseError)
     end
 
     it 'raises if L is used for something else than days' do
 
-      lambda { cl '* L * * *'}.should raise_error(ArgumentError)
+      lambda { cl '* L * * *'}.should raise_error(Whedon::ParseError)
     end
 
     it 'raises for out of range input' do
 
-      lambda { cl '60-62 * * * *'}.should raise_error(ArgumentError)
-      lambda { cl '62 * * * *'}.should raise_error(ArgumentError)
-      lambda { cl '60 * * * *'}.should raise_error(ArgumentError)
-      lambda { cl '* 25-26 * * *'}.should raise_error(ArgumentError)
-      lambda { cl '* 25 * * *'}.should raise_error(ArgumentError)
+      lambda { cl '60-62 * * * *'}.should raise_error(Whedon::ParseError)
+      lambda { cl '62 * * * *'}.should raise_error(Whedon::ParseError)
+      lambda { cl '60 * * * *'}.should raise_error(Whedon::ParseError)
+      lambda { cl '* 25-26 * * *'}.should raise_error(Whedon::ParseError)
+      lambda { cl '* 25 * * *'}.should raise_error(Whedon::ParseError)
         #
         # as reported by Aimee Rose in
         # https://github.com/jmettraux/rufus-scheduler/pull/58

@@ -4,7 +4,7 @@ require "whedon/version"
 
 Gem::Specification.new do |s|
   s.name        = "whedon"
-  s.version     = Parse::Cron::VERSION
+  s.version     = Whedon::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["John Mettraux", "Blake Thomas"]
   s.email       = ["jmettraux@gmail.com", "bwthomas@gmail.com"]

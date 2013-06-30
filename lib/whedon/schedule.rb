@@ -27,6 +27,8 @@ require 'tzinfo'
 
 module Whedon
 
+  class ParseError < ArgumentError; end
+
   #
   # A 'cron line' is a line in the sense of a crontab
   # (man 5 crontab) file line.
@@ -62,7 +64,7 @@ module Whedon
       @timezone = (TZInfo::Timezone.get(items.last) rescue nil)
       items.pop if @timezone
 
-      raise ArgumentError.new(
+      raise ParseError.new(
         "not a valid cronline : '#{line}'"
       ) unless items.length == 5 or items.length == 6
 
@@ -77,7 +79,7 @@ module Whedon
 
       [ @seconds, @minutes, @hours, @months ].each do |es|
 
-        raise ArgumentError.new(
+        raise ParseError.new(
           "invalid cronline: '#{line}'"
         ) if es && es.find { |e| ! e.is_a?(Fixnum) }
       end
@@ -234,7 +236,7 @@ module Whedon
 
         if m = it.match(/^(.+)#(l|-?[12345])$/)
 
-          raise ArgumentError.new(
+          raise ParseError.new(
             "ranges are not supported for monthdays (#{it})"
           ) if m[1].index('-')
 
@@ -247,7 +249,7 @@ module Whedon
           expr = it.dup
           WEEKDAYS.each_with_index { |a, i| expr.gsub!(/#{a}/, i.to_s) }
 
-          raise ArgumentError.new(
+          raise ParseError.new(
             "invalid weekday expression (#{it})"
           ) if expr !~ /^0*[0-7](-0*[0-7])?$/
 
@@ -269,7 +271,7 @@ module Whedon
 
       r = item.split(',').map { |i| parse_range(i.strip, min, max) }.flatten
 
-      raise ArgumentError.new(
+      raise ParseError.new(
         "found duplicates in #{item.inspect}"
       ) if raise_error_on_duplicate? && r.uniq.size < r.size
 
@@ -284,7 +286,7 @@ module Whedon
 
       m = item.match(RANGE_REGEX)
 
-      raise ArgumentError.new(
+      raise ParseError.new(
         "cannot parse #{item.inspect}"
       ) unless m
 
@@ -298,7 +300,7 @@ module Whedon
       inc = m[3]
       inc = inc ? inc.to_i : 1
 
-      raise ArgumentError.new(
+      raise ParseError.new(
         "#{item.inspect} is not in range #{min}..#{max}"
       ) if sta < min or edn > max
 
