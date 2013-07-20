@@ -296,6 +296,13 @@ describe Whedon::Schedule do
 
   describe '#matches?' do
 
+    it 'accepts epoch time' do
+      cl('* * * * *').matches?(Time.at(0)).should be_true
+    end
+
+    it 'accepts a time string' do
+      cl('* * * * *').matches?('1969-12-31 18:00:00 -0600').should be_true
+    end
 
     [ ['* * * * *',     utc(1970, 1, 1, 0, 1),      true],
       ['* * * * sun',   utc(1970, 1, 4),            true],

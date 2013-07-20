@@ -63,7 +63,7 @@ module Whedon
 
     # Returns true if the given time matches this cron line.
     #
-    def matches?(time)
+    def matches?(time=Time.now)
 
       time = as_time(time)
 
@@ -73,10 +73,7 @@ module Whedon
       return false unless date_match?(time)
       true
     end
-
-    def now?(time=Time.now)
-      matches?(time)
-    end
+    alias_method :now?, :matches?
 
     # Returns the next time that this cron line is supposed to 'fire'
     #
