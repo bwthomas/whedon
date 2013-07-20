@@ -38,4 +38,7 @@ Why 'whedon' ? First, [when](http://rubygems.org/gems/when) was taken. I was
 considering variations on 'when do', & it occurred to me that 'whedon' (a la
 [Joss Whedon](http://en.wikipedia.org/wiki/Joss_Whedon)) was an obvious anagram
 of 'when do'. The pun regarding Whedon::Schedule being that Joss Whedon's
-television series tend to get pulled from the network schedule
+television series tend to get pulled from the network schedule.
+
+## License
+[MIT](http://opensource.org/licenses/MIT). See [LICENSE](LICENSE).

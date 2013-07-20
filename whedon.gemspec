@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/bwthomas/whedon"
   s.summary     = %q{Parses cron lines}
   s.description = %q{Parses cron lines into a Schedule instance that can be queried.}
+  s.license     = 'MIT'
 
   s.rubyforge_project = "whedon"
 
