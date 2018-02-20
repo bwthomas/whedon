@@ -57,7 +57,7 @@ module Whedon
 
         raise ParseError.new(
           "invalid cronline: '#{line}'"
-        ) if es && es.find { |e| ! e.is_a?(Fixnum) }
+        ) if es && es.find { |e| ! e.is_a?(Integer) }
       end
     end
 

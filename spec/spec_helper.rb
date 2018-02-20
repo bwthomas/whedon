@@ -5,6 +5,12 @@ SimpleCov.start do
   add_filter                "spec"
 end
 
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+end
+
 require File.expand_path("../../lib/whedon", __FILE__)
 
 class Ex < Whedon::Schedule
@@ -28,5 +34,5 @@ def cl(line)
 end
 
 def compare(line, array)
-  cl(line).to_array.should == array
+  expect(cl(line).to_array).to eq(array)
 end

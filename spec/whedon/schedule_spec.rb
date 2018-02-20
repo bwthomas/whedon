@@ -49,12 +49,12 @@ describe Whedon::Schedule do
 
     it 'rejects invalid weekday expressions' do
 
-      lambda { cl '0 17 * * MON_FRI' }.should raise_error
+      lambda { cl '0 17 * * MON_FRI' }.should raise_error(Whedon::ParseError)
         # underline instead of dash
 
-      lambda { cl '* * * * 9' }.should raise_error
-      lambda { cl '* * * * 0-12' }.should raise_error
-      lambda { cl '* * * * BLABLA' }.should raise_error
+      lambda { cl '* * * * 9' }.should raise_error(Whedon::ParseError)
+      lambda { cl '* * * * 0-12' }.should raise_error(Whedon::ParseError)
+      lambda { cl '* * * * BLABLA' }.should raise_error(Whedon::ParseError)
     end
 
     it 'rejects invalid cronlines' do
@@ -67,8 +67,8 @@ describe Whedon::Schedule do
       compare '* * * * * EST', [ [0], nil, nil, nil, nil, nil, nil, 'EST' ]
       compare '* * * * * * EST', [ nil, nil, nil, nil, nil, nil, nil, 'EST' ]
 
-      lambda { cl '* * * * * NotATimeZone' }.should raise_error
-      lambda { cl '* * * * * * NotATimeZone' }.should raise_error
+      lambda { cl '* * * * * NotATimeZone' }.should raise_error(Whedon::ParseError)
+      lambda { cl '* * * * * * NotATimeZone' }.should raise_error(Whedon::ParseError)
     end
 
     it 'interprets cron strings with / (slashes) correctly' do
@@ -297,11 +297,11 @@ describe Whedon::Schedule do
   describe '#matches?' do
 
     it 'accepts epoch time' do
-      cl('* * * * *').matches?(Time.at(0)).should be_true
+      cl('* * * * *').matches?(Time.at(0)).should be true
     end
 
     it 'accepts a time string' do
-      cl('* * * * *').matches?('1969-12-31 18:00:00 -0600').should be_true
+      cl('* * * * *').matches?('1969-12-31 18:00:00 -0600').should be true
     end
 
     [ ['* * * * *',     utc(1970, 1, 1, 0, 1),      true],
@@ -350,22 +350,22 @@ describe Whedon::Schedule do
 
     it 'matches correctly when there is a sun#2 involved' do
 
-      cl('* * 13 * fri#2').matches?(utc(1970, 2, 13)).should be_true
-      cl('* * 13 * fri#2').matches?(utc(1970, 2, 20)).should be_false
+      cl('* * 13 * fri#2').matches?(utc(1970, 2, 13)).should be true
+      cl('* * 13 * fri#2').matches?(utc(1970, 2, 20)).should be false
     end
 
     it 'matches correctly when there is a L involved' do
 
-      cl('* * L * *').matches?(utc(1970, 1, 31)).should be_true
-      cl('* * L * *').matches?(utc(1970, 1, 30)).should be_false
+      cl('* * L * *').matches?(utc(1970, 1, 31)).should be true
+      cl('* * L * *').matches?(utc(1970, 1, 30)).should be false
     end
 
     it 'matches correctly when there is a sun#2,sun#3 involved' do
 
-      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 4) ).should be_false
-      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 11) ).should be_true
-      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 18) ).should be_true
-      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 25) ).should be_false
+      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 4) ).should be false
+      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 11) ).should be true
+      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 18) ).should be true
+      cl('* * * * sun#2,sun#3').matches?( local(1970, 1, 25) ).should be false
     end
   end
 
